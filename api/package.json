@@ -1,0 +1,19 @@
+{
+  "name": "shoppingcart-api",
+  "version": "1.0.0",
+  "description": "Creating a new order (shopping cart) and saving orders in the database through API - | React And NodeJs And Mysql |",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "app:dev": "nodemon app.js",
+    "app:pub": "node app.js"
+  },
+  "author": "Abolfazl Ghaderi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mysql": "^2.18.1"
+  }
+}
