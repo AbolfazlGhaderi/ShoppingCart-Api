@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import ProductItem from '../components/ProductItem'
 
 import { productList } from '../data/items'
-
+import axios from 'axios'
 function Shop() {
   return (
 
