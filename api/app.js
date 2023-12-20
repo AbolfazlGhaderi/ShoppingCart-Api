@@ -17,13 +17,16 @@ app.use('/orders',oRouter)
 
 
 DB.connect( async (err) => {
+   //----------- If there was an error -------------------
     if (err) throw err
+
+   //----------- If there is no error -------------------
     console.log('Database Connected')
     app.listen(3000, () => {
         console.log('Server is Running on port 3000')
     })
-    CreateTabels();    
-
+   //----------- Create tables  ----------------
+    CreateTabels();  
 
 })
 
