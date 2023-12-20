@@ -25,19 +25,20 @@ function Navbar() {
   }
 
   async function checkout() {
-    console.log(JSON.stringify({ items: cart.items }));
     
-    const response = await fetch('http://localhost:3000/api', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cart.items }),
-    })
+    console.log(JSON.stringify({ items: cart.items,price :cart.getTotalAmount()}));
+    
+    // const response = await fetch('http://localhost:3000/api', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ items: cart.items }),
+    // })
 
-    const data = await response.json()
+    // const data = await response.json()
 
-    if (data.url) {
-      window.location.assign(data.url)
-    }
+    // if (data.url) {
+    //   window.location.assign(data.url)
+    // }
   }
 
   return (
@@ -66,8 +67,8 @@ function Navbar() {
                 <h3 className='mb-4'>سبد خرید</h3>
                 {cart.items.map((item) => (
                   <CartProduct
-                    key={item.id}
-                    id={item.id}
+                    key={item.product_id}
+                    id={item.product_id}
                     quantity={item.quantity}
                   ></CartProduct>
                 ))}

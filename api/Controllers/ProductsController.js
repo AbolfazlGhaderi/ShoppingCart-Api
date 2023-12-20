@@ -11,7 +11,7 @@ export function getProducts(req, res) {
         if (err) throw err
 
         //----------- If there is no product ----------------
-        if (result.length == 0) return res.status(404).json(JSON.stringify({ "msg": "No Products Pound / Products" }))
+        if (result.length == 0) return res.status(500).json(JSON.stringify({ "msg": "No Products Found | Post/ Products" }))
 
         //----------- If there is product ----------------
         res.status(200).json(JSON.stringify(result))

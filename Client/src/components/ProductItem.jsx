@@ -6,7 +6,7 @@ import { CartContext } from '../context/CartContext'
 function ProductItem({ product }) {
   const cart = useContext(CartContext)
 
-  const productQuantity = cart.getProductQuantity(product.id)
+  const productQuantity = cart.getProductQuantity(product.product_id)
 
   return (
     <Card className='mt-5 card-bg'>
@@ -31,7 +31,7 @@ function ProductItem({ product }) {
               </Form.Label>
               <Col sm='6'>
                 <Button
-                  onClick={() => cart.addItemToCart(product.id)}
+                  onClick={() => cart.addItemToCart(product.product_id)}
                   sm='6'
                   className='mx-2 text-white'
                   variant='btn btn-outline-secondary'
@@ -39,7 +39,7 @@ function ProductItem({ product }) {
                   +
                 </Button>
                 <Button
-                  onClick={() => cart.removeItemFromCart(product.id)}
+                  onClick={() => cart.removeItemFromCart(product.product_id)}
                   sm='6'
                   className='mx-2 text-white'
                   variant='btn btn-outline-secondary'
@@ -49,7 +49,7 @@ function ProductItem({ product }) {
               </Col>
             </Form>
             <Button
-              onClick={() => cart.deleteFromCart(product.id)}
+              onClick={() => cart.deleteFromCart(product.product_id)}
               className='my-4'
               variant='btn btn-light'
             >
@@ -58,7 +58,7 @@ function ProductItem({ product }) {
           </>
         ) : (
           <Button
-            onClick={() => cart.addItemToCart(product.id)}
+            onClick={() => cart.addItemToCart(product.product_id)}
             variant='btn btn-outline-secondary'
             className='text-white'
           >

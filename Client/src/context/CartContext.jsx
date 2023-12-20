@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([])
 
   function getProductQuantity(id) {
-    const quantity = cartProducts.find((item) => item.id === id)?.quantity
+    const quantity = cartProducts.find((item) => item.product_id === id)?.quantity
 
     if (quantity === undefined) {
       return 0
@@ -28,11 +28,11 @@ export function CartProvider({ children }) {
     const quantity = getProductQuantity(id)
 
     if (quantity === 0) {
-      setCartProducts([...cartProducts, { id: id, quantity: 1 }])
+      setCartProducts([...cartProducts, { product_id: id, quantity: 1 }])
     } else {
       setCartProducts(
         cartProducts.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.product_id === id ? { ...item, quantity: item.quantity + 1 } : item
         )
       )
     }
@@ -41,7 +41,7 @@ export function CartProvider({ children }) {
   function deleteFromCart(id) {
     setCartProducts((cartProducts) =>
       cartProducts.filter((item) => {
-        return item.id != id
+        return item.product_id!= id
       })
     )
   }
@@ -54,17 +54,17 @@ export function CartProvider({ children }) {
     } else {
       setCartProducts(
         cartProducts.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        item.product_id === id ? { ...item, quantity: item.quantity - 1 } : item
         )
       )
     }
   }
 
   function getTotalAmount() {
-    let totalAmount = 0
+    var totalAmount = 0
 
     cartProducts.map((item) => {
-      const productData = getProductData(item.id)
+      const productData = getProductData(item.product_id)
 
       totalAmount += productData.price * item.quantity
     })
