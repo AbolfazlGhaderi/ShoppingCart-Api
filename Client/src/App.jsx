@@ -8,6 +8,7 @@ import Shop from './pages/Shop'
 import Success from './pages/Success'
 
 function App() {
+  
   return (
     <CartProvider>
       <Container>
