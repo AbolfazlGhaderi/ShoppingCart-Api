@@ -7,14 +7,21 @@ import {DB} from './Configs/DBConfig.js'
 import {CreateTabels} from './models/DBCreateTables.js'
 const app = express();
 
+//------ Middlewares -----------
+
 app.use(cors());
 app.use(express.json());
 
+// ------------ Statics ------------
+
 app.use('/images', express.static(path.join("images")));
 
+// ----- Routes --------------
 app.use('/products',pRouter)
 app.use('/orders',oRouter)
 
+
+// ---------- connect to DB And Running the server --------------------
 
 DB.connect( async (err) => {
    //----------- If there was an error -------------------

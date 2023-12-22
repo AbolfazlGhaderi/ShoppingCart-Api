@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 
 function Success() {
+  console.log(window.location.href.split("="));
+
+
   return (
     <div className='d-flex align-items-center justify-content-center flex-column my-4'>
       <h2>سفارش با موفقیت ثبت شد</h2>

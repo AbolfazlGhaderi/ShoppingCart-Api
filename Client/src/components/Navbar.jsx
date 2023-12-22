@@ -6,7 +6,7 @@ import { BsCart } from 'react-icons/bs'
 import { CartContext } from '../context/CartContext'
 
 import CartProduct from './CartProduct'
-
+import axios from 'axios'
 function Navbar() {
   const [showModal, setShowModal] = useState(false)
 
@@ -25,20 +25,30 @@ function Navbar() {
   }
 
   async function checkout() {
-    
-    console.log(JSON.stringify({ items: cart.items,price :cart.getTotalAmount()}));
-    
-    // const response = await fetch('http://localhost:3000/api', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ items: cart.items }),
-    // })
+    // -------- Calculate the total number of products ---------
+    let total = 0;
+    cart.items.map(item => {
+      total += item.quantity;
+    })
 
-    // const data = await response.json()
+    //-----------------------------------------
+console.log({items: cart.items, price: cart.getTotalAmount(), total: total});
+    await axios({
+      method: 'post',
+      url: 'http://localhost:3000/orders',
+      data: {
+        items: cart.items, price: cart.getTotalAmount(), total: total
+      }
+    }).then(result => {
+      console.log(result.data);
 
-    // if (data.url) {
-    //   window.location.assign(data.url)
-    // }
+      if (result.status==201 && result.data.url) {
+       return  window.location.assign(result.data.url)
+      }
+    }).catch(err=>{
+      console.log(err);
+    });
+
   }
 
   return (
