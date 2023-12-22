@@ -17,10 +17,7 @@ function Shop() {
       } else {
         setProductList(res)
       }
-
-
     })
-
   }, [])
 
   return (
@@ -39,7 +36,6 @@ function Shop() {
         : null}
 
       <Row xs={1} md={2} lg={4} className='g-4'>
-
         {productList.map((item) => (
           <Col align='center' key={item.product_id}>
             <ProductItem product={item} />
