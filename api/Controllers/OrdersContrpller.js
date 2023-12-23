@@ -9,28 +9,52 @@ export function getOrders(req, res) {
 
 
 export function postOrder(req, res) {
-    // -------- Create a Order ID -----------------
+    // -------- Create a Order ID --------------------------------------
 
     const orderId = numberNanoid();
 
-    // -------- today's date -----------------
+    // -------- today's Date And Time-----------------------------------
     const date = new Date()
     const nowDate = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+    const nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
 
-    //--------- Add order to database --------------
+    //--------- Save Order to DB -----------------------------------
 
-    let sql = "INSERT INTO `orders` (order_id,create_date,total_amount, total) VALUES(?,?,?,?)";
-    DB.query(sql, [orderId, `${nowDate}`, req.body.price, req.body.total], (err, result) => {
-        //----------- If there was an error -------------------
+
+    let sql = "INSERT INTO `orders`  VALUES(?,?,?,?,?)";
+    DB.query(sql, [orderId, `${nowDate}`, `${nowTime}`, req.body.price, req.body.total], (err, result) => {
+
+        //----------- If there was an error ------------------------------
         if (err) {
-            res.status(500).json({ msg: "ERROR" })
+            res.status(500).json({ msg: "ERROR Save Order" })
             console.log(sql);
             throw err
         }
-        //----------- If there is no error -------------------
 
-        console.log(result);
-        res.status(201).json({ msg: "Ok / The order was registered! ", url: `/success?orderID=${orderId}` })
+        //---------------- Creating the necessary values for storage -------------
+        let orderDetailValue =''
+        req.body.items.map(item=>{
+            orderDetailValue+=`(${orderId},${item.product_id}),`
+            
+        })
+        orderDetailValue=orderDetailValue.slice(0,orderDetailValue.length-1);
+        console.log(orderDetailValue);
+        //----------- Save Order Detail to DB ---------------------------------------------------
+        let sql = `INSERT INTO order_detail (order_fk,product_fk)  VALUES${orderDetailValue}`;
+        DB.query(sql,(err, result) => {
+
+            //----------- If there was an error ------------------------------
+            if (err) {
+                res.status(500).json({ msg: "ERROR Save Order Detail " })
+                console.log(sql);
+                throw err
+            }
+
+            //----------- Save Order Detail to DB ---------------------------------------------------
+
+            res.status(201).json({ msg: "Ok / The order was registered! ", url: `/success?orderID=${orderId}` })
+        })
+
     })
 
 

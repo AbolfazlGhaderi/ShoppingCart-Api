@@ -32,7 +32,7 @@ function Navbar() {
     })
 
     //-----------------------------------------
-console.log({items: cart.items, price: cart.getTotalAmount(), total: total});
+// console.log({items: cart.items, price: cart.getTotalAmount(), total: total});
     await axios({
       method: 'post',
       url: 'http://localhost:3000/orders',
@@ -40,11 +40,11 @@ console.log({items: cart.items, price: cart.getTotalAmount(), total: total});
         items: cart.items, price: cart.getTotalAmount(), total: total
       }
     }).then(result => {
-      console.log(result.data);
 
       if (result.status==201 && result.data.url) {
        return  window.location.assign(result.data.url)
       }
+
     }).catch(err=>{
       console.log(err);
     });
@@ -83,13 +83,15 @@ console.log({items: cart.items, price: cart.getTotalAmount(), total: total});
                   ></CartProduct>
                 ))}
                 <h3>مجموع قیمت: {cart.getTotalAmount()}</h3>
-              </>
+              
+              <Button className='mt-4' variant='btn btn-light' onClick={checkout}>
+              ثبت سفارش
+            </Button>
+            </>
             ) : (
               <h3>سبد خرید خالی است</h3>
             )}
-            <Button className='mt-4' variant='btn btn-light' onClick={checkout}>
-              ثبت سفارش
-            </Button>
+
             <Button
               onClick={handleClose}
               variant='btn btn-outline-secondary'
