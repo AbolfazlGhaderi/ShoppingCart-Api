@@ -30,4 +30,14 @@ function getProductData(id) {
   return productData
 }
 
-export { getProducts, getProductData,getOrderDetailsById }
+var date=''
+function getAndSetTime(datein){
+  date = new Date(datein)
+  date.setSeconds(date.getSeconds() + 0)
+  date.setMinutes(date.getMinutes() + 30)
+  date.setHours(date.getHours()+ 3)
+  return date
+  
+}
+
+export { getProducts, getProductData,getOrderDetailsById ,getAndSetTime}

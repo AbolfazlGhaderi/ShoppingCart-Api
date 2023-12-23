@@ -16,7 +16,7 @@ async function CreateTabels() {
 
         //----------- create table orders ---------------------------------
 
-        let sql="CREATE TABLE IF NOT EXISTS `orders` (order_id varchar(100) NOT NULL,create_date date NOT NULL,create_time time NOT NULL,total_amount INT NOT NULL, Total int NOT NULL, CONSTRAINT pk_order_id PRIMARY KEY (order_id));"
+        let sql="CREATE TABLE IF NOT EXISTS `orders` (order_id varchar(100) NOT NULL,create_date DATETIME NOT NULL,total_amount INT NOT NULL, Total int NOT NULL, CONSTRAINT pk_order_id PRIMARY KEY (order_id));"
         DB.query(sql, (err) => {
             if (err) throw err;
            

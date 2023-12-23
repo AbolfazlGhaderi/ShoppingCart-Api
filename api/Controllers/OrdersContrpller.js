@@ -27,15 +27,15 @@ export function postOrder(req, res) {
     const orderId = numberNanoid();
 
     // -------- today's Date And Time-----------------------------------
-    const date = new Date()
-    const nowDate = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
-    const nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+    let date = new Date().toISOString();
+    date=date.split('.',1)
+    date=date.toString().replace('T',' ')
 
     //--------- Save Order And OrdrtDetails to DB -----------------------------------
 
 
-    let sql = "INSERT INTO `orders`  VALUES(?,?,?,?,?)";
-    DB.query(sql, [orderId, `${nowDate}`, `${nowTime}`, req.body.price, req.body.total], (err, result) => {
+    let sql = "INSERT INTO `orders`  VALUES(?,?,?,?)";
+    DB.query(sql, [orderId, `${date}`, req.body.price, req.body.total], (err, result) => {
 
         //----------- If there was an error ------------------------------
         if (err) {
@@ -44,7 +44,7 @@ export function postOrder(req, res) {
             throw err
         }
 
-        //---------------- Creating the necessary values for storage -------------
+        //---------------- Creating the necessary values for storage (Detailes) -------------
         let orderDetailValue = ''
         req.body.items.map(item => {
             orderDetailValue += `(${orderId},${item.product_id}),`
@@ -61,7 +61,6 @@ export function postOrder(req, res) {
             //----------- If there was an error ------------------------------
             if (err) {
                 res.status(500).json({ msg: "ERROR Save Order Detail " })
-                console.log(sql);
                 throw err
             }
 
