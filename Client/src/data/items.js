@@ -11,7 +11,7 @@ async function getProducts() {
   return  productList
 }
 
-async function getOrderDetailsById(id) {
+async function getOrderByID(id) {
   await axios.get(`http://localhost:3000/orders/${id}`).then(result=>{
     orderDetailes=result.data
 
@@ -40,4 +40,4 @@ function getAndSetTime(datein){
   
 }
 
-export { getProducts, getProductData,getOrderDetailsById ,getAndSetTime}
+export { getProducts, getProductData,getOrderByID ,getAndSetTime}

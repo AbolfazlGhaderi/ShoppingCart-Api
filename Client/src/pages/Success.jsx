@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getOrderDetailsById,getAndSetTime } from '../data/items.js'
+import { getOrderByID,getAndSetTime } from '../data/items.js'
 function Success() {
   const urlParts = window.location.href.split("=");
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ function Success() {
 
   useEffect(() => {
 
-    getOrderDetailsById(urlParts[1]).then(result => {
+    getOrderByID(urlParts[1]).then(result => {
       setIsLoading(false)
 
       if (result.msg) {

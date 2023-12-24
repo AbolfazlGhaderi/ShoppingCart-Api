@@ -3,14 +3,14 @@ import { DB } from '../Configs/DBConfig.js';
 
 const numberNanoid = customAlphabet('1234567890', 12)
 
-export function getOrderDetailsById(req, res) {
+export function getOrderByID(req, res) {
     // ---------- Get Id ----------------------------------------
     const id = req.params.id;
 
     // ----------- Select Order Details From DB ------------------
     let sql = `SELECT * FROM orders WHERE order_id=${id}`
     DB.query(sql, (err, result) => {
-        console.log(result);
+        
         // ---------------- if there was an error ----------------
         if (err) {
             res.status(500).json({ msg: "ERROR To Get Order Detailes" })
@@ -40,7 +40,6 @@ export function postOrder(req, res) {
         //----------- If there was an error ------------------------------
         if (err) {
             res.status(500).json({ msg: "ERROR Save Order" })
-            console.log(sql);
             throw err
         }
 
@@ -51,9 +50,9 @@ export function postOrder(req, res) {
 
         })
         orderDetailValue = orderDetailValue.slice(0, orderDetailValue.length - 1);
-        console.log(orderDetailValue);
+        
 
-        //----------- Save Order Detail to DB ---------------------------------------------------
+        //----------- Save Order Details to DB ---------------------------------------------------
 
         let sql = `INSERT INTO order_detail (order_fk,product_fk)  VALUES${orderDetailValue}`;
         DB.query(sql, (err, result) => {
@@ -64,6 +63,7 @@ export function postOrder(req, res) {
                 throw err
             }
 
+            //--------------------------
             res.status(201).json({ msg: "Ok / The order was registered! ", url: `/success?orderID=${orderId}` })
         })
 

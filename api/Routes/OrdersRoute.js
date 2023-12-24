@@ -1,10 +1,10 @@
 import { Router } from 'express';
 export const oRouter = Router();
 
-import { getOrderDetailsById, postOrder} from '../Controllers/OrdersContrpller.js'
+import { getOrderByID, postOrder} from '../Controllers/OrdersContrpller.js'
 
 
 
-oRouter.get('/:id',getOrderDetailsById)
+oRouter.get('/:id',getOrderByID)
 
 oRouter.post('/',postOrder)
