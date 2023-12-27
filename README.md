@@ -58,7 +58,7 @@ In this regard I posted a tip on [my Personal LinkedIn](https://www.linkedin.com
 
 ## Feedback 🧑🏼‍💻
 
-If you have feedback or anything to say , please reach out to me (Telegram : https://t.me/Abolfazl_ghaderii Or Email: brianprogrammer0@gmail.com) 
+If you have feedback or anything to say , please reach out to me (Telegram : https://t.me/Abolfazl_ghaderii Or Email: dev.ghaderi@gmail.com) 
 
 Thank you for being with me until now ❤️
 
